@@ -15,6 +15,7 @@ const collections: CollectionSlug[] = [
   'media',
   'pages',
   'posts',
+  'properties',
   'forms',
   'form-submissions',
   'search',
@@ -257,6 +258,63 @@ export const seed = async ({
     },
   })
 
+  payload.logger.info(`— Seeding properties...`)
+
+  // Create sample properties
+  const property1Doc = await payload.create({
+    collection: 'properties',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: {
+      title: 'Modern Downtown Apartment',
+      slug: 'modern-downtown-apartment',
+      location: 'Downtown, New York, NY',
+      price: 850000,
+      image: image1Doc.id,
+      description: 'A stunning modern apartment in the heart of downtown with breathtaking city views. Features include hardwood floors, stainless steel appliances, and floor-to-ceiling windows.',
+      isPublished: true,
+      publishedAt: new Date().toISOString(),
+    },
+  })
+
+  const property2Doc = await payload.create({
+    collection: 'properties',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: {
+      title: 'Luxury Suburban Villa',
+      slug: 'luxury-suburban-villa',
+      location: 'Westchester County, NY',
+      price: 1250000,
+      image: image2Doc.id,
+      description: 'Elegant suburban villa with spacious rooms, beautiful garden, and premium finishes. Perfect for families seeking comfort and luxury in a peaceful neighborhood.',
+      isPublished: true,
+      publishedAt: new Date().toISOString(),
+    },
+  })
+
+  const property3Doc = await payload.create({
+    collection: 'properties',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: {
+      title: 'Cozy Brooklyn Townhouse',
+      slug: 'cozy-brooklyn-townhouse',
+      location: 'Brooklyn Heights, NY',
+      price: 675000,
+      image: image3Doc.id,
+      description: 'Charming townhouse in historic Brooklyn Heights. Features original architectural details, updated kitchen, and private backyard. Close to parks and transportation.',
+      isPublished: true,
+      publishedAt: new Date().toISOString(),
+    },
+  })
+
   payload.logger.info(`— Seeding contact form...`)
 
   const contactForm = await payload.create({
@@ -292,6 +350,13 @@ export const seed = async ({
               type: 'custom',
               label: 'Posts',
               url: '/posts',
+            },
+          },
+          {
+            link: {
+              type: 'custom',
+              label: 'Properties',
+              url: '/properties',
             },
           },
           {
